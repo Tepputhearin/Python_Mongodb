@@ -10,24 +10,20 @@ connection = mysql.connector.connect(
     database="kit"
 )
 # read mysql table
-cursor = connection.cursor()
+cursor = connection.cursor(dictionary=True)
 read_mysql = cursor.execute("SELECT * FROM dse10")
 students = cursor.fetchall()
 
 # create a database named Task in mongodb
-mydb = client["Task"]
+mydb = client["New"]
 print("Database connected or created")
 
 # collection named people created
-mycol = mydb["Students"]
+mycol = mydb["students"]
 print("Collection connected or created")
-# convert tuple of mysql to {} in mongodb
-data = []
-for i in students:
-    item = {'Sid': i[0], 'Sname': i[1], 'SAge': i[2]}
-    data.append(item)
-# insert the converted mysql to mongodb records
-mycol.insert_many(data)
-print("Table from mysql inserted to Mongodb")
+
+if len(students) > 0:
+    x = mycol.insert_many(students)
+#     print(len(x.inserted_ids))
 for y in mycol.find():
     print(y)
