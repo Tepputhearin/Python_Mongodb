@@ -16,5 +16,5 @@ mycol.insert_one(data)
 print("Record inserted")
 
 # inserting records
-# data_new = [{'name':'lamb', 'age':22},{'name':'Jerry', 'age':18}]
-# mycol.insert_many(data_new)
+data_new = [{'name':'lamb', 'age':22},{'name':'Jerry', 'age':18}]
+mycol.insert_many(data_new)
